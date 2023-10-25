@@ -10,8 +10,8 @@ CREATE TABLE tblCategoria(
 
 CREATE TABLE tblProduto(
     idProduto INT NOT NULL IDENTITY PRIMARY KEY,
-    descricao VARHCAR(50) INT NOT NULL,
-    precoVenda DOUBLE(6, 2) INT NOT NULL,
+    descricao VARHCAR(50) NOT NULL,
+    precoVenda DOUBLE(6, 2) NOT NULL,
     estoque INT NOT NULL
 );
 
@@ -28,12 +28,12 @@ CREATE TABLE tblPessoa(
 
 CREATE TABLE tblTelefone (
     cpfPessoa INT NOT NULL PRIMARY KEY,
-    ddi CHAR(3) INT NOT NULL PRIMARY KEY,
-    ddd CHAR(3) INT NOT NULL PRIMARY KEY,
+    ddi CHAR(3) NOT NULL PRIMARY KEY,
+    ddd CHAR(3) NOT NULL PRIMARY KEY,
     telefone VARCHAR(20) NOT NULL PRIMARY KEY,
     nomeContato VARCHAR(20) NOT NULL,
     descricao VARCHAR(30),
-    FOREIGN KEY(cpfPessoa) REFERENCES tblPessoa(cpf),
+    FOREIGN KEY(cpfPessoa) REFERENCES tblPessoa(cpf)
 );
 
 CREATE TABLE tblCliente(
@@ -60,4 +60,25 @@ CREATE TABLE tblApartamento(
     status VARCHAR(20) NOT NULL,
     idCategoria INT NOT NULL,
     FOREIGN KEY(idCategoria) REFERENCES tblCategoria(idCategoria)
+);
+
+CREATE TABLE tblReserva(
+    idReserva INT NOT NULL IDENTITY PRIMARY KEY,
+    dataInicio DATE NOT NULL,
+    dataPrevistaSaida DATE NOT NULL,
+    numeroApartamento INT NOT NULL,
+    cpfCliente INT NOT NULL,
+    cpfFuncionario INT NOT NULL,
+    FOREIGN KEY(numeroApartamento) REFERENCES tblApartamento(numero),
+    FOREIGN KEY(cpfCliente) REFERENCES tblCliente(cpfPessoa),
+    FOREIGN KEY(cpfFuncionario) REFERENCES tblFuncionario(cpfPessoa)
+);
+
+CREATE TABLE tblConsumo(
+    idHospedagem INT NOT NULL PRIMARY KEY,
+    idProduto INT NOT NULL PRIMARY KEY,
+    quantidade INT NOT NULL,
+    precoUnitario DOUBLE(6, 2) NOT NULL,
+    FOREIGN KEY(idHospedagem) REFERENCES tblHospedagem(idHospedagem),
+    FOREIGN KEY(idProduto) REFERENCES tblProduto(idProduto)
 );
