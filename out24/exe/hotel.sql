@@ -1,17 +1,17 @@
 CREATE DATABASE Hotel;
 
-Use Hotel;
+USE Hotel;
 
 CREATE TABLE tblCategoria(
     idCategoria INT NOT NULL IDENTITY PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    valorDiaria DOUBLE(6, 2) NOT NULL
+    valorDiaria DECIMAL(6, 2) NOT NULL
 );
 
 CREATE TABLE tblProduto(
     idProduto INT NOT NULL IDENTITY PRIMARY KEY,
-    descricao VARHCAR(50) NOT NULL,
-    precoVenda DOUBLE(6, 2) NOT NULL,
+    descricao VARCHAR(50) NOT NULL,
+    precoVenda DECIMAL(6, 2) NOT NULL,
     estoque INT NOT NULL
 );
 
@@ -78,7 +78,7 @@ CREATE TABLE tblConsumo(
     idHospedagem INT NOT NULL PRIMARY KEY,
     idProduto INT NOT NULL PRIMARY KEY,
     quantidade INT NOT NULL,
-    precoUnitario DOUBLE(6, 2) NOT NULL,
+    precoUnitario DECIMAL(6, 2) NOT NULL,
     FOREIGN KEY(idHospedagem) REFERENCES tblHospedagem(idHospedagem),
     FOREIGN KEY(idProduto) REFERENCES tblProduto(idProduto)
 );
