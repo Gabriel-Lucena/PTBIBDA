@@ -1,6 +1,6 @@
-create database hospital;
+CREATE DATABASE hospital;
 
-use hospital;
+USE hospital;
 
 CREATE TABLE tblGenero(
     idGenero INT NOT NULL IDENTITY PRIMARY KEY,
